@@ -1,5 +1,5 @@
 // src/services/api.js
-// Only returns mock data — NO axios used
+// Vercel-compatible: Mock data only
 
 const mockData = {
     name: 'Dr. Ghulam Dastgir Khan',
@@ -36,8 +36,9 @@ const mockData = {
     get: async (path) => {
       if (path === '/professor') {
         return Promise.resolve({ data: mockData });
+      } else {
+        return Promise.reject(new Error('Path not supported in mock mode'));
       }
-      return Promise.reject(new Error('Not implemented'));
     }
   };
   
