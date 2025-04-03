@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import api from '../services/api';
 import './Profile.css';
-import profileImg from '../assets/profile.jpg';
 
 const Profile = () => {
   const [professor, setProfessor] = useState(null);
 
   useEffect(() => {
     api.get('/professor')
-      .then(res => setProfessor(res.data))
-      .catch(err => console.error('❌ API error:', err));
+      .then(res => {
+        console.log('✅ Loaded data:', res.data);
+        setProfessor(res.data);
+      })
+      .catch(err => {
+        console.error('❌ API error:', err);
+      });
   }, []);
 
   if (!professor) return <p style={{ padding: '20px' }}>Loading profile...</p>;
@@ -25,12 +29,10 @@ const Profile = () => {
       </nav>
 
       <header className="profile-header" id="home">
-  <img src={profileImg} alt="Professor" className="profile-image" />
-  <h1>{professor.name}</h1>
-  <h2>{professor.title}</h2>
-  <p className="bio">{professor.biography}</p>
-</header>
-
+        <h1>{professor.name}</h1>
+        <h2>{professor.title}</h2>
+        <p className="bio">{professor.biography}</p>
+      </header>
 
       <section id="research">
         <h3>Research Interests</h3>
