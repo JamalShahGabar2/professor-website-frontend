@@ -1,6 +1,7 @@
 // src/services/api.js
 import axios from 'axios';
 
+// 👇 Make sure this is TRUE for production
 const useMock = true;
 
 const mockData = {
@@ -37,9 +38,12 @@ const mockData = {
 const api = {
   get: async (path) => {
     if (useMock && path === '/professor') {
+      console.log("🧪 Using mock data");
       return Promise.resolve({ data: mockData });
     }
-    return axios.get(`http://localhost:5000/api${path}`);
+
+    // This is ONLY used locally, not on Vercel
+    return axios.get(`http://localhost:5050/api${path}`);
   }
 };
 
