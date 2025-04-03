@@ -1,5 +1,5 @@
 // src/services/api.js
-const useMock = true;
+const useMock = true; // Always true for production
 
 const mockData = {
   name: 'Dr. Ghulam Dastgir Khan',
@@ -37,10 +37,10 @@ const api = {
     if (useMock && path === '/professor') {
       return Promise.resolve({ data: mockData });
     }
-    // In dev: uncomment to use backend
-    // return axios.get(`http://localhost:5050/api${path}`);
-    return Promise.reject('❌ Backend is disabled in production');
-  },
+
+    // ❌ NEVER use localhost in production
+    return Promise.reject('API disabled in production.');
+  }
 };
 
 export default api;
