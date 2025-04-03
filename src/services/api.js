@@ -39,9 +39,8 @@ const mockData = {
     get: async (path) => {
       if (path === "/professor") {
         return Promise.resolve({ data: mockData });
-      } else {
-        return Promise.reject(new Error("Path not supported in mock mode"));
       }
+      return Promise.reject(new Error("Unsupported path"));
     }
   };
   
